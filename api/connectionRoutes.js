@@ -1,15 +1,11 @@
 import express from "express";
-import multer from "multer";
-import {singleUpload,multiplebyField} from '../middelware/upload.js'
+import {singleUpload} from '../middelware/upload.js'
 import uploadController from "../controller/uploadController.js";
 import {
     createConnection_Site_Details, createConnection_Jobs, getConnectionJob, createConnectionInvoiceDetails,
-    creatConnectionYourConnectionDate,
-    updateconnectionprogression, updateConnection_Jobs, updateConnection_Site_Details,
+    creatConnectionYourConnectionDate,updateConnection_Jobs, updateConnection_Site_Details,
     updateConnectionInvoiceDetails, getConnectionInvoiceDetails, updateConnectionYourConnectionDate, getConnectionYourConnectionDate,
-    creatConnectionSiteInformation, updateConnectionSiteInformation, getConnectionSiteInformation,
-    updateConnection_Types,
-    updateConnection_Status,getConnectionStatus,
+    creatConnectionSiteInformation, updateConnectionSiteInformation, getConnectionSiteInformation,getConnectionStatus,
     createConnection_Site_Owner_Details, updateConnection_Site_Owner_Details, getConnectionsiteownerdetails,
     createConnection_Site_Contact_Details, updateConnection_Site_Contact_Details, getConnectionSiteContactDetails,
     createConnection_Single_Installer_Details, updateConnection_Single_Installer_Details, getConnectionSingleInstallerDetails,
@@ -32,26 +28,14 @@ import {
     createConnection_New_Generation, updateConnection_New_Generation, getConnectionNewGeneration,
     CreateConnection_New_Generation_3_68kws, getConnection_New_Generation_3_68kws, updateConnection_New_Generation_3_68kw,reduceConnection_New_Generation_3_68kws,
     createConnectionNewGenerationKWMW, updateConnectionNewGenerationKWMW, getConnectionNewGenerationKWMW,reduceConnection_New_Generation_KW_MW,
-    createConnectionNewGeneration3_68kwEngStorage, getConnectionNewGeneration3_68kwEngStorage,
     createConnection_New_Generation_200kw, updateConnection_New_Generation_200kw, getConnection_New_Generation_200kw,reduceConnection_New_Generation_200kw
 } from "../controller/Connection_New_Generation_Controller.js";
 import {ConnectionTypesController,connectionTypesController} from "../controller/Connection_type_controller.js";
 import usemyaddress from "../controller/customerController.js";
-import mapservice from "../services/siteplanMapService.js";
+import {getConnectionList,PaginatedResult} from '../controller/getConnectionListController.js'
+import {saveJobNote,getJobNote} from "../controller/connectionJobNoteController.js";
+// import mapservice from "../services/siteplanMapService.js";
 const router = express.Router();
-
-
-// router.get('/:id', (req , res)=>{
-//     let id = req.params.id;
-//     console.log(id);
-//     let sql = "select * from ce2_content.Connection_Jobs where id = ?";
-//     connectionDB.query(sql , id , (err , result)=>{
-//         if(err) throw err;
-//         res.json(result);
-//     });
-// });
-
-
 // connection_Jobs
 router.post('/connection_Jobs', createConnection_Jobs);
 router.put('/connection_Jobs/:id', updateConnection_Jobs);
@@ -156,7 +140,6 @@ router.get('/Connection_Progression', getConnectionProgression);
 router.get('/connection_Status', getConnectionStatus);
 // Connection_Type
 router.get('/connectionJob/Connection_Type/:Connection_Type', ConnectionTypesController);
-router.get('/connectionJob/Connection_Type', connectionTypesController);
 // router.put('/Connection_Types/:id', updateConnection_Types);
 // ConnectionAdditionalInformation
 router.post('/connectionJob/ConnectionAdditionalInformation',createConnectionAdditionalInformation);
@@ -174,5 +157,13 @@ router.post('/upload',singleUpload,uploadController);
 
 //USE MY CORRESPONDENCE ADDRESS
 router.get('/connectionJob/Use_Correspondence_Address', usemyaddress);
-router.get('/map', mapservice);
+// router.get('/map', mapservice);
+
+router.get('/connectionJob/Connection_Type', connectionTypesController);
+
+// Search Connection
+router.post('/getConnection',getConnectionList)
+// Connection Job Note
+router.post('/connectionJob/connectioJobNote',saveJobNote);
+router.get('/connectionJob/connectioJobNote',getJobNote);
 export default router;
