@@ -1,5 +1,5 @@
 import ConnectionSiteDetails from '../models/Connection_Site_Details_Model.js';
-import { ConnectionJobs, Reference } from '../models/connection_jobs_Model.js';
+import { ConnectionJobs, Reference } from '../models/connection_Jobs_Model.js';
 import ConnectionInvoiceDetails from '../models/Connection_Invoice_Details_Model.js';
 import ConnectionSiteInformation from '../models/Connection_Site_Information_Model.js';
 import ConnectionYourConnectionDate from '../models/Conection_Your_Connection_Date_Model.js';
@@ -44,6 +44,7 @@ const createConnection_Jobs = async (req, res) => {
 
     } catch (error) {
         console.log(error);
+        res.status(500).json({"message" : "Internal Server Error"});
     }
 };
 const updateConnection_Jobs = async (req, res) => {
@@ -66,9 +67,7 @@ const updateConnection_Jobs = async (req, res) => {
         }
 
     } catch (error) {
-        res.status(400).json({
-            "error": "Something Went Wrong"
-        });
+        res.status(500).json({"message" : "Internal Server Error"});
     }
 };
 
@@ -82,17 +81,19 @@ const getConnectionJob = async (req, res) => {
             });
         } else {
             const responce = await ConnectionJobs.findbyid(id);
-            if (Object.keys(responce).length === 0) {
-                res.status(200).json(responce);
-            } else {
-                Object.keys(responce).forEach((key) => {
-                    let row = responce[key]
-                    res.status(200).json(responce);
-                });
-            }
+            // if (Object.keys(responce).length === 0) {
+            //     res.status(200).json(responce);
+            // } else {
+            //     Object.keys(responce).forEach((key) => {
+            //         let row = responce[key]
+            //         res.status(200).json(responce);
+            //     });
+            // }
+            res.status(200).json((responce.length > 0) ? responce : {});
         }
     } catch (error) {
         console.log(error);
+        res.status(500).json({"message" : "Internal Server Error"});
     }
 }
 
@@ -120,6 +121,7 @@ const createConnectionInvoiceDetails = async (req, res) => {
 
     } catch (error) {
         console.log(error);
+        res.status(500).json({"message" : "Internal Server Error"});
     }
 };
 
@@ -133,17 +135,19 @@ const getConnectionInvoiceDetails = async (req, res) => {
             });
         } else {
             const responce = await ConnectionInvoiceDetails.findbyId(Id);
-            if (Object.keys(responce).length === 0) {
-                res.status(200).json(responce);
-            } else {
-                Object.keys(responce).forEach((key) => {
-                    let row = responce[key]
-                    res.status(200).json(row);
-                });
-            }
+            // if (Object.keys(responce).length === 0) {
+            //     res.status(200).json(responce);
+            // } else {
+            //     Object.keys(responce).forEach((key) => {
+            //         let row = responce[key]
+            //         res.status(200).json(row);
+            //     });
+            // }
+            res.status(200).json((responce.length > 0) ? responce[0] : {});
         }
     } catch (error) {
         console.log(error);
+        res.status(500).json({"message" : "Internal Server Error"});
     }
 }
 const creatConnectionSiteInformation = async (req, res) => {
@@ -169,6 +173,7 @@ const creatConnectionSiteInformation = async (req, res) => {
 
     } catch (error) {
         console.log(error);
+        res.status(500).json({"message" : "Internal Server Error"});
     }
 };
 
@@ -196,6 +201,7 @@ const creatConnectionYourConnectionDate = async (req, res) => {
 
     } catch (error) {
         console.log(error);
+        res.status(500).json({"message" : "Internal Server Error"});
     }
 };
 
@@ -226,6 +232,7 @@ const updateConnectionInvoiceDetails = async (req, res) => {
         }
     } catch (error) {
         console.log(error);
+        res.status(500).json({"message" : "Internal Server Error"});
     }
 };
 
@@ -252,6 +259,7 @@ const updateConnection_Site_Details = async (req, res) => {
         }
     } catch (error) {
         console.log(error);
+        res.status(500).json({"message" : "Internal Server Error"});
     }
 };
 
@@ -265,18 +273,20 @@ const FindConnnectionSiteDetails = async (req, res) => {
             });
         } else {
             const responce = await ConnectionSiteDetails.findbyid(Con_Id);
-            if (Object.keys(responce).length === 0) {
-                res.status(404).json(responce);
-            } else {
-                let row = new Object();
-                Object.keys(responce).forEach((key) => {
-                    row = responce[key]
-                });
-                res.status(200).json(responce);
-            }
+            // if (Object.keys(responce).length === 0) {
+            //     res.status(200).json(responce);
+            // } else {
+            //     let row = new Object();
+            //     Object.keys(responce).forEach((key) => {
+            //         row = responce[key]
+            //     });
+            //     res.status(200).json(responce);
+            // }
+            res.status(200).json((responce.length > 0) ? responce[0] : {});
         }
     } catch (error) {
         console.log(error);
+        res.status(500).json({"message" : "Internal Server Error"});
     }
 };
 
@@ -302,6 +312,7 @@ const updateConnectionYourConnectionDate = async (req, res) => {
         }
     } catch (error) {
         console.log(error);
+        res.status(500).json({"message" : "Internal Server Error"});
     }
 };
 const getConnectionYourConnectionDate = async (req, res) => {
@@ -314,17 +325,19 @@ const getConnectionYourConnectionDate = async (req, res) => {
             });
         } else {
             const responce = await ConnectionYourConnectionDate.findbyId(Id);
-            if (Object.keys(responce).length === 0) {
-                res.status(404).json(responce);
-            } else {
-                Object.keys(responce).forEach((key) => {
-                    let row = responce[key]
-                    res.status(200).json(responce);
-                });
-            }
+            // if (Object.keys(responce).length === 0) {
+            //     res.status(404).json(responce);
+            // } else {
+            //     Object.keys(responce).forEach((key) => {
+            //         let row = responce[key]
+            //         res.status(200).json(responce);
+            //     });
+            // }
+            res.status(200).json((responce.length > 0) ? responce: {});
         }
     } catch (error) {
         console.log(error);
+        res.status(500).json({"message" : "Internal Server Error"})
     }
 }
 const updateconnectionprogression = async (req, res) => {
@@ -350,6 +363,7 @@ const updateconnectionprogression = async (req, res) => {
         }
     } catch (error) {
         console.log(error);
+        res.status(500).json({"message" : "Internal Server Error"});
     }
 };
 const updateConnectionSiteInformation = async (req, res) => {
@@ -375,6 +389,7 @@ const updateConnectionSiteInformation = async (req, res) => {
         }
     } catch (error) {
         console.log(error);
+        res.status(500).json({"message" : "Internal Server Error"});
     }
 };
 const getConnectionSiteInformation = async (req, res) => {
@@ -387,17 +402,19 @@ const getConnectionSiteInformation = async (req, res) => {
             });
         } else {
             const responce = await ConnectionSiteInformation.findbyid(Id);
-            if (Object.keys(responce).length === 0) {
-                res.status(404).json(responce);
-            } else {
-                Object.keys(responce).forEach((key) => {
-                    let row = responce[key]
-                    res.status(200).json(row);
-                });
-            }
+            // if (Object.keys(responce).length === 0) {
+            //     res.status(404).json(responce);
+            // } else {
+            //     Object.keys(responce).forEach((key) => {
+            //         let row = responce[key]
+            //         res.status(200).json(row);
+            //     });
+            // }
+            res.status(200).json((responce.length > 0) ? responce[0] : {});
         }
     } catch (error) {
         console.log(error);
+        res.status(500).json({"message" : "Internal Server Error"})
     }
 }
 
@@ -423,6 +440,7 @@ const createConnection_Site_Details = async (req, res) => {
         }
     } catch (error) {
         console.log(error);
+        res.status(500).json({"message" : "Internal Server Error"});
     }
 };
 // Connection_Site_Owner_Details
@@ -451,6 +469,7 @@ const createConnection_Site_Owner_Details = async (req, res) => {
         }
     } catch (error) {
         console.log(error);
+        res.status(500).json({"message" : "Internal Server Error"});
     }
 };
 const updateConnection_Site_Owner_Details = async (req, res) => {
@@ -482,6 +501,7 @@ const updateConnection_Site_Owner_Details = async (req, res) => {
         }
     } catch (error) {
         console.log(error);
+        res.status(500).json({"message" : "Internal Server Error"});
     }
 };
 const getConnectionsiteownerdetails = async (req, res) => {
@@ -494,17 +514,19 @@ const getConnectionsiteownerdetails = async (req, res) => {
             });
         } else {
             const responce = await ConnectionSiteOwnerDetails.findbyid(Id);
-            if (Object.keys(responce).length === 0) {
-                res.status(200).json(responce);
-            } else {
-                Object.keys(responce).forEach((key) => {
-                    let row = responce[key]
-                    res.status(200).json(row);
-                });
-            }
+            // if (Object.keys(responce).length === 0) {
+            //     res.status(200).json(responce);
+            // } else {
+            //     Object.keys(responce).forEach((key) => {
+            //         let row = responce[key]
+            //         res.status(200).json(row);
+            //     });
+            // }
+            res.status(200).json((responce.length > 0) ? responce[0] : {});
         }
     } catch (error) {
         console.log(error);
+        res.status(500).json({"message" : "Internal Server Error"})
     }
 }
 const updateConnection_Types = async (req, res) => {
@@ -533,6 +555,7 @@ const updateConnection_Types = async (req, res) => {
         }
     } catch (error) {
         console.log(error);
+        res.status(500).json({"message" : "Internal Server Error"});
     }
 }
 // Connection_Multiple_Premises_Details
@@ -564,6 +587,7 @@ const createConnection_Multiple_Premises_Details = async (req, res) => {
         }
     } catch (error) {
         console.log(error);
+        res.status(500).json({"message" : "Internal Server Error"});
     }
 }
 const updateConnection_Multiple_Premises_Details = async (req, res) => {
@@ -622,14 +646,15 @@ const getConnectioMultiplepremisedetails = async (req, res) => {
             //         "message": "Not Found"
             //     });
             // } else {
-                // Object.keys(responce).forEach((key)=>{
-                //  let row = responce[key]
-                res.status(200).json(responce);
-                //});
+            // Object.keys(responce).forEach((key)=>{
+            //  let row = responce[key]
+            res.status(200).json((responce.length > 0) ? responce : {});
+            //});
             // }
         }
     } catch (error) {
         console.log(error);
+        res.status(500).json({"message" : "Internal Server Error"})
     }
 }
 const deleteConnectionMultiplepremisedetails = async (req, res) => {
@@ -657,6 +682,7 @@ const deleteConnectionMultiplepremisedetails = async (req, res) => {
         }
     } catch (error) {
         console.log(error);
+        res.status(500).json({"message" : "Internal Server Error"});
     }
 }
 
@@ -687,6 +713,7 @@ const createConnection_Site_Contact_Details = async (req, res) => {
         }
     } catch (error) {
         console.log(error);
+        res.status(500).json({"message" : "Internal Server Error"});
     }
 };
 const updateConnection_Site_Contact_Details = async (req, res) => {
@@ -716,6 +743,7 @@ const updateConnection_Site_Contact_Details = async (req, res) => {
         }
     } catch (error) {
         console.log(error);
+        res.status(500).json({"message" : "Internal Server Error"});
     }
 };
 const getConnectionSiteContactDetails = async (req, res) => {
@@ -733,14 +761,17 @@ const getConnectionSiteContactDetails = async (req, res) => {
             //         "message": "Not Found"
             //     });
             // } else {
-                Object.keys(responce).forEach((key) => {
-                    let row = responce[key]
-                    res.status(200).json(row);
-                });
+            // Object.keys(responce).forEach((key) => {
+            //     let row = responce[key]
+            //     res.status(200).json(row);
+            // });
             // }
+            res.status(200).json((responce.length > 0) ? responce[0] : {});
         }
     } catch (error) {
         console.log(error);
+        res.status(500).json({"message" : "Internal Server Error"})
+        
     }
 }
 
@@ -752,12 +783,10 @@ const updateConnection_Status = async (req, res) => {
 
         const results = await ConnectionStatus.update(data, id);
         res.status(201).json({
-            success: 1,
             data: results
         });
     } catch (error) {
         res.status(400).json({
-            success: 1,
             data: "Something went wrong"
         });
     }
@@ -776,13 +805,11 @@ const getConnectionStatus = async (req, res) => {
         //     });
         // } else {
 
-            res.status(200).json(responce);
+        res.status(200).json((responce.length > 0) ? responce[0] : {});
         // }
         // }
     } catch (error) {
-        res.status(400).json({
-            "message": "Bad request"
-        });
+        res.status(500).json({"message" : "Internal Server Error"});
     }
 }
 // Connection_Single_Installer_Detailss
@@ -808,7 +835,7 @@ const createConnection_Single_Installer_Details = async (req, res) => {
             }
         }
     } catch (error) {
-        console.log(error);
+        res.status(500).json({"message" : "Internal Server Error"});
     }
 }
 
@@ -835,7 +862,7 @@ const updateConnection_Single_Installer_Details = async (req, res) => {
             }
         }
     } catch (error) {
-        console.log(error);
+        res.status(500).json({"message" : "Internal Server Error"});
     }
 }
 const getConnectionSingleInstallerDetails = async (req, res) => {
@@ -853,14 +880,16 @@ const getConnectionSingleInstallerDetails = async (req, res) => {
             //         "message": "Not Found"
             //     });
             // } else {
-                Object.keys(responce).forEach((key) => {
-                    let row = responce[key]
-                    res.status(200).json(row);
-                });
+            // Object.keys(responce).forEach((key) => {
+            //     let row = responce[key]
+            //     res.status(200).json(row);
+            // });
             // }
+            res.status(200).json((responce.length > 0) ? responce[0] : {});
         }
     } catch (error) {
         console.log(error);
+        res.status(500).json({"message" : "Internal Server Error"});
     }
 }
 // Connection_Multiple_Installer_Details
@@ -887,6 +916,7 @@ const createConnection_Multiple_Installer_Details = async (req, res) => {
         }
     } catch (error) {
         console.log(error);
+        res.status(500).json({"message" : "Internal Server Error"});
     }
 }
 
@@ -914,6 +944,7 @@ const updateConnection_Multiple_Installer_Details = async (req, res) => {
         }
     } catch (error) {
         console.log(error);
+        res.status(500).json({"message" : "Internal Server Error"});
     }
 }
 const getConnectionMultipleInstallerDetails = async (req, res) => {
@@ -931,14 +962,16 @@ const getConnectionMultipleInstallerDetails = async (req, res) => {
             //         "message": "Not Found"
             //     });
             // } else {
-                Object.keys(responce).forEach((key) => {
-                    let row = responce[key]
-                    res.status(200).json(row);
-                });
+            // Object.keys(responce).forEach((key) => {
+            //     let row = responce[key]
+            //     res.status(200).json(row);
+            // });
             // }
+            res.status(200).json((responce.length > 0) ? responce[0] : {});
         }
     } catch (error) {
         console.log(error);
+        res.status(500).json({"message" : "Internal Server Error"});
     }
 }
 // Connection_Single_Premises_Details
@@ -971,6 +1004,7 @@ const createConnection_Single_Premises_Details = async (req, res) => {
         }
     } catch (error) {
         console.log(error);
+        res.status(500).json({"message" : "Internal Server Error"});
     }
 }
 const updateConnection_Single_Premises_Details = async (req, res) => {
@@ -1014,6 +1048,7 @@ const updateConnection_Single_Premises_Details = async (req, res) => {
         }
     } catch (error) {
         console.log(error);
+        res.status(500).json({"message" : "Internal Server Error"});
     }
 }
 const getConnectionSinglepremisedetails = async (req, res) => {
@@ -1031,14 +1066,15 @@ const getConnectionSinglepremisedetails = async (req, res) => {
             //         "message": "Not Found"
             //     });
             // } else {
-                //Object.keys(responce).forEach((key)=>{
-                //  let row = responce[key]
-                res.status(200).json(responce);
-                //});
+            //Object.keys(responce).forEach((key)=>{
+            //  let row = responce[key]
+            res.status(200).json((responce.length > 0) ? responce : {});
+            //});
             // }
         }
     } catch (error) {
         console.log(error);
+        res.status(500).json({"message" : "Internal Server Error"});
     }
 }
 const deleteConnectionSinglepremisedetails = async (req, res) => {
@@ -1066,6 +1102,7 @@ const deleteConnectionSinglepremisedetails = async (req, res) => {
         }
     } catch (error) {
         console.log(error);
+        res.status(500).json({"message" : "Internal Server Error"});
     }
 }
 const createConnection_Your_Work_Date = async (req, res) => {
@@ -1092,6 +1129,7 @@ const createConnection_Your_Work_Date = async (req, res) => {
         }
     } catch (error) {
         console.log(error);
+        res.status(500).json({"message" : "Internal Server Error"});
     }
 }
 const updateConnection_Your_Work_Date = async (req, res) => {
@@ -1119,6 +1157,7 @@ const updateConnection_Your_Work_Date = async (req, res) => {
         }
     } catch (error) {
         console.log(error);
+        res.status(500).json({"message" : "Internal Server Error"});
     }
 }
 const createConnection_Moving_Equipment = async (req, res) => {
@@ -1145,6 +1184,7 @@ const createConnection_Moving_Equipment = async (req, res) => {
         }
     } catch (error) {
         console.log(error);
+        res.status(500).json({"message" : "Internal Server Error"});
     }
 
 }
@@ -1173,6 +1213,7 @@ const updateConnection_Moving_Equipment = async (req, res) => {
         }
     } catch (error) {
         console.log(error);
+        res.status(500).json({"message" : "Internal Server Error"});
     }
 }
 const getConnectionMovingEquipment = async (req, res) => {
@@ -1185,26 +1226,26 @@ const getConnectionMovingEquipment = async (req, res) => {
             });
         } else {
             const responce = await ConnectionMovingEquipment.findbyConnectionId(connectionid);
-            if (Object.keys(responce).length === 0) {
-                res.status(200).json(responce);
-            } else {
+            // if (Object.keys(responce).length === 0) {
+            //     res.status(200).json(responce);
+            // } else {
+                let row = new  Object()
                 Object.keys(responce).forEach((key) => {
-                    let row = responce[key]
+                    Object.assign(row, responce[key]);
                     const Equipment_Require_Movingarray = new Array();
                     const stringArray = row.Equipment_Require_Moving.split(',');
                     for (let i = 0; i < stringArray.length; i++) {
                         Equipment_Require_Movingarray.push(parseInt(stringArray[i]));
                     }
-                    console.log(Equipment_Require_Movingarray);
                     delete row.Equipment_Require_Moving;
                     row.Equipment_Require_Moving = Equipment_Require_Movingarray;
-
-                    res.status(200).json(row);
                 });
-            }
+                res.status(200).json((responce.length > 0) ? row : {});
+            // }
         }
     } catch (error) {
         console.log(error);
+        res.status(500).json({"message" : "Internal Server Error"});
     }
 }
 const getConnectionWorkDate = async (req, res) => {
@@ -1217,17 +1258,18 @@ const getConnectionWorkDate = async (req, res) => {
             });
         } else {
             const responce = await ConnectionWorkDate.findbyid(connectionid);
-            if (Object.keys(responce).length === 0) {
-                res.status(200).json(responce);
-            } else {
+            // if (Object.keys(responce).length === 0) {
+            //     res.status(200).json({});
+            // } else {
                 //Object.keys(responce).forEach((key)=>{
                 ///  let row = responce[key]
-                res.status(200).json(responce);
+                res.status(200).json((responce.length > 0) ? responce : {});
                 //});
-            }
+            // }
         }
     } catch (error) {
         console.log(error);
+        res.status(500).json({"message" : "Internal Server Error"});
     }
 }
 // Connection_Existing_Generation
@@ -1254,6 +1296,7 @@ const createConnection_Existing_Generation = async (req, res) => {
         }
     } catch (error) {
         console.log(error);
+        res.status(500).json({"message" : "Internal Server Error"});
     }
 }
 
@@ -1282,6 +1325,7 @@ const updateConnection_Existing_Generation = async (req, res) => {
         }
     } catch (error) {
         console.log(error);
+        res.status(500).json({"message" : "Internal Server Error"});
     }
 }
 const getConnectionExistingGeneration = async (req, res) => {
@@ -1294,17 +1338,19 @@ const getConnectionExistingGeneration = async (req, res) => {
             });
         } else {
             const responce = await ConnectionExistingGeneration.findbyId(Id);
-            if (Object.keys(responce).length === 0) {
-                res.status(200).json(responce);
-            } else {
-                //Object.keys(responce).forEach((key)=>{
-                //  let row = responce[key]
-                res.status(200).json(responce);
-                //});
-            }
+            // if (Object.keys(responce).length === 0) {
+            //     res.status(200).json(responce);
+            // } else {
+            //     //Object.keys(responce).forEach((key)=>{
+            //     //  let row = responce[key]
+            //     res.status(200).json(responce);
+            //     //});
+            // }
+            res.status(200).json((responce.length > 0) ? responce : {});
         }
     } catch (error) {
         console.log(error);
+        res.status(500).json({"message" : "Internal Server Error"});
     }
 }
 // Connection_Your_Connection
@@ -1331,6 +1377,7 @@ const createConnection_Your_Connection = async (req, res) => {
         }
     } catch (error) {
         console.log(error);
+        res.status(500).json({"message" : "Internal Server Error"});
     }
 }
 const updateConnection_Your_Connection = async (req, res) => {
@@ -1357,6 +1404,7 @@ const updateConnection_Your_Connection = async (req, res) => {
         }
     } catch (error) {
         console.log(error);
+        res.status(500).json({"message" : "Internal Server Error"});
     }
 }
 const getConnectionYourConnection = async (req, res) => {
@@ -1391,6 +1439,7 @@ const getConnectionYourConnection = async (req, res) => {
         }
     } catch (error) {
         console.log(error);
+        res.status(500).json({"message" : "Internal Server Error"});
     }
 }
 // Connection_Contact_Preference
@@ -1417,6 +1466,7 @@ const createConnection_Contact_Preference = async (req, res) => {
         }
     } catch (error) {
         console.log(error);
+        res.status(500).json({"message" : "Internal Server Error"});
     }
 }
 
@@ -1445,6 +1495,7 @@ const updateConnection_Contact_Preference = async (req, res) => {
         }
     } catch (error) {
         console.log(error);
+        res.status(500).json({"message" : "Internal Server Error"});
     }
 }
 const getConnectionContactPreference = async (req, res) => {
@@ -1457,18 +1508,20 @@ const getConnectionContactPreference = async (req, res) => {
             });
         } else {
             const responce = await ConnectionContactPreference.findbyId(Id);
-            if (Object.keys(responce).length === 0) {
-                res.status(200).json(responce);
-            } else {
-                //Object.keys(responce).forEach((key)=>{
-                //  let row = responce[key]
-                res.status(200).json(responce);
-                //  console.log(responce);                
-                //});
-            }
+            // if (Object.keys(responce).length === 0) {
+            //     res.status(200).json(responce);
+            // } else {
+            //     //Object.keys(responce).forEach((key)=>{
+            //     //  let row = responce[key]
+            //     res.status(200).json(responce);
+            //     //  console.log(responce);                
+            //     //});
+            // }
+            res.status(200).json((responce.length > 0) ? responce : {});
         }
     } catch (error) {
         console.log(error);
+        res.status(500).json({"message" : "Internal Server Error"});
     }
 }
 
@@ -1639,16 +1692,12 @@ const createconnectionelectricalequipment = async (req, res) => {
         });
     }
     catch (error) {
-        res.status(400).json({
-            message: "something went wrong"
-        })
+        res.status(500).json({"message" : "Internal Server Error"});
     }
 };
 
 const updateconnectionelectricalequipment = async (req, res) => {
-
     let newConnectionelectricalequipment = req.body;
-
     console.log(newConnectionelectricalequipment);
     let id = req.params.id;
     if (Object.keys(newConnectionelectricalequipment).length === 0 && !req.params.id) {
@@ -2041,6 +2090,7 @@ const getConnectionElectricalEquipment = async (req, res) => {
         }
     } catch (error) {
         console.log(error);
+        res.status(500).json({"message" : "Internal Server Error"});
     }
 }
 const reducegroundpump = async (req, res) => {
@@ -2065,6 +2115,7 @@ const reducegroundpump = async (req, res) => {
         }
     } catch (error) {
         console.log(error);
+        res.status(500).json({"message" : "Internal Server Error"});
     }
 }
 const reduceairpump = async (req, res) => {
@@ -2089,6 +2140,7 @@ const reduceairpump = async (req, res) => {
         }
     } catch (error) {
         console.log(error);
+        res.status(500).json({"message" : "Internal Server Error"});
     }
 }
 const reducemotor = async (req, res) => {
@@ -2113,6 +2165,7 @@ const reducemotor = async (req, res) => {
         }
     } catch (error) {
         console.log(error);
+        res.status(500).json({"message" : "Internal Server Error"});
     }
 }
 const reducewelder = async (req, res) => {
@@ -2137,6 +2190,7 @@ const reducewelder = async (req, res) => {
         }
     } catch (error) {
         console.log(error);
+        res.status(500).json({"message" : "Internal Server Error"});
     }
 }
 const getConnectionProgression = async (req, res) => {
@@ -2160,6 +2214,7 @@ const getConnectionProgression = async (req, res) => {
         // }
     } catch (error) {
         console.log(error);
+        res.status(500).json({"message" : "Internal Server Error"});
     }
 }
 // ConnectionAdditionalInformation
@@ -2186,6 +2241,7 @@ const createConnectionAdditionalInformation = async (req, res) => {
 
     } catch (error) {
         console.log(error);
+        res.status(500).json({"message" : "Internal Server Error"});
     }
 };
 const updateConnectionAdditionalInformation = async (req, res) => {
@@ -2212,6 +2268,7 @@ const updateConnectionAdditionalInformation = async (req, res) => {
 
     } catch (error) {
         console.log(error);
+        res.status(500).json({"message" : "Internal Server Error"});
     }
 };
 
@@ -2226,8 +2283,8 @@ const getConnectionAdditionalInformation = async (req, res) => {
         } else {
             const responce = await ConnectionAdditionalInformation.findbyConnectionId(Id);
             // const filename = await getFileDetails(responce[0].Current_Upload_Additionalinfo)
-            if (Object.keys(responce).length === 0) {
-                res.status(200).json(responce);
+            if (Object.keys(responce).length == 0) {
+                res.status(200).json({});
             } else {
                 let row = responce[0];
                 row.File_Name = await getFileDetails(responce[0].Current_Upload_Additionalinfo);
@@ -2236,6 +2293,7 @@ const getConnectionAdditionalInformation = async (req, res) => {
         }
     } catch (error) {
         console.log(error);
+        res.status(500).json({"message" : "Internal Server Error"});
     }
 }
 //connectionsiteplan
@@ -2251,8 +2309,8 @@ const getConnectionSitePlan = async (req, res) => {
         } else {
             let result = new Object();
             const response = await ConnectionSitePlan.findbyId(Connection_Id);
-            if (Object.keys(response).length === 0) {
-                res.status(200).json(response);
+            if (Object.keys(response).length == 0) {
+                res.status(200).json({});
             } else {
                 Object.keys(response).forEach((key) => {
                     let row = response[key]
@@ -2287,6 +2345,7 @@ const getConnectionSitePlan = async (req, res) => {
         }
     } catch (error) {
         console.log(error);
+        res.status(500).json({"message" : "Internal Server Error"});
     }
 }
 
@@ -2309,7 +2368,7 @@ const createConnectionSitePlan = async (req, res) => {
                 response = await ConnectionSitePlan.update(data);
             }
             else {
-                
+
                 delete data.SiteId;
                 data.Created = new Date();
                 response = await ConnectionSitePlan.create(data);
@@ -2319,7 +2378,7 @@ const createConnectionSitePlan = async (req, res) => {
                 console.log(response);
                 res.status(201).json({
 
-                    "message": (response.insertId>0)?"Sucessfully Created":"Successfully updated"
+                    "message": (response.insertId > 0) ? "Sucessfully Created" : "Successfully updated"
                 })
 
             } else {
@@ -2330,6 +2389,7 @@ const createConnectionSitePlan = async (req, res) => {
         }
     } catch (error) {
         console.log(error);
+        res.status(500).json({"message" : "Internal Server Error"});
     }
 }
 
@@ -2358,6 +2418,7 @@ const updateConnectionSitePlan = async (req, res) => {
 
     } catch (error) {
         console.log(error);
+        res.status(500).json({"message" : "Internal Server Error"});
     }
 };
 
