@@ -32,8 +32,8 @@ import {
 } from "../controller/Connection_New_Generation_Controller.js";
 import {ConnectionTypesController,connectionTypesController} from "../controller/Connection_type_controller.js";
 import usemyaddress from "../controller/customerController.js";
-import {getConnectionList,PaginatedResult} from '../controller/getConnectionListController.js'
-import {saveJobNote,getJobNote} from "../controller/connectionJobNoteController.js";
+//import {getConnectionList,PaginatedResult} from '../controller/getConnectionListController.js'
+//import {saveJobNote,getJobNote} from "../controller/connectionJobNoteController.js";
 // import mapservice from "../services/siteplanMapService.js";
 const router = express.Router();
 // connection_Jobs
@@ -162,8 +162,8 @@ router.get('/connectionJob/Use_Correspondence_Address', usemyaddress);
 router.get('/connectionJob/Connection_Type', connectionTypesController);
 
 // Search Connection
-router.post('/getConnection',getConnectionList)
+//router.post('/getConnection',getConnectionList)
 // Connection Job Note
-router.post('/connectionJob/connectioJobNote',saveJobNote);
-router.get('/connectionJob/connectioJobNote',getJobNote);
+//router.post('/connectionJob/connectioJobNote',saveJobNote);
+//router.get('/connectionJob/connectioJobNote',getJobNote);
 export default router;
